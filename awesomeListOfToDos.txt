@@ -1,0 +1,8 @@
+This is a reminder so i dont forget what im doing :)
+- nick
+
+Whats Getting Done rn:
+- Using advantagekit's talonfx swerve template to get a base down
+
+What's Next:
+- Use CRTE Tuner X tool to fix the TunerConstants.java 
