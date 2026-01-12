@@ -50,7 +50,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     switch (Constants.currentMode) {
-      case DEV_Spark:
+      case SPARK:
         // DEV bot on Spark, instantiate hardware IO implementations
         drive =
             new Drive(
