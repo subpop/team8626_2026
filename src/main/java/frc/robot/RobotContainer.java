@@ -23,12 +23,17 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.IndexerCommands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOADIS16470;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOSpark;
+import frc.robot.subsystems.indexer.Indexer;
+import frc.robot.subsystems.indexer.IndexerIO;
+import frc.robot.subsystems.indexer.IndexerIOSim;
+import frc.robot.subsystems.indexer.IndexerIOSpark;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -40,6 +45,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private final Indexer index;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -59,6 +65,7 @@ public class RobotContainer {
                 new ModuleIOSpark(1),
                 new ModuleIOSpark(2),
                 new ModuleIOSpark(3));
+        index = new Indexer(new IndexerIOSpark());
         break;
       case CTRE:
         // Real robot, instantiate hardware IO implementations
@@ -69,6 +76,7 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        index = new Indexer(new IndexerIO() {});
         break;
 
       case SIM:
@@ -80,6 +88,7 @@ public class RobotContainer {
                 new ModuleIOSim(),
                 new ModuleIOSim(),
                 new ModuleIOSim());
+        index = new Indexer(new IndexerIOSim());
         break;
 
       default:
@@ -91,6 +100,7 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        index = new Indexer(new IndexerIO() {});
         break;
     }
 
@@ -155,6 +165,9 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
+
+    // Run the indexer at max RPM for 8 seconds
+    controller.y().onTrue(IndexerCommands.runFor8Seconds(index));
   }
 
   /**
