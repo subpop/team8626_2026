@@ -14,6 +14,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -125,6 +126,9 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+
+    // Configure named commands
+    configureNamedCommands();
   }
 
   /**
@@ -168,6 +172,11 @@ public class RobotContainer {
 
     // Run the indexer at max RPM for 8 seconds
     controller.y().onTrue(IndexerCommands.runFor8Seconds(index));
+  }
+
+  /** Configure named commands to be identified by autos and paths. */
+  private void configureNamedCommands() {
+    NamedCommands.registerCommand("RunIndexerFor8Seconds", IndexerCommands.runFor8Seconds(index));
   }
 
   /**
