@@ -26,9 +26,9 @@ public class VisionConstants {
   public static final String frontCameraName = "front_camera";
   public static final String backCameraName = "back_camera";
 
-  // AprilTag field layout for 2025 Reefscape
+  // AprilTag field layout for 2026 Rebuilt
   public static final AprilTagFieldLayout fieldLayout =
-      AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeAndyMark);
+      AprilTagFieldLayout.loadField(AprilTagFields.k2026RebuiltAndymark);
 
   // Camera mounting transforms (robot-relative)
   // Front camera: mounted ~10 inches forward of robot center,
