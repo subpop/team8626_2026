@@ -209,7 +209,7 @@ public class Vision extends SubsystemBase {
       return Optional.empty();
     }
 
-    return Optional.of(
+    Pose3d bestTargetFieldPose =
         new Pose3d(
             inputs.bestTargetFieldX[cameraIndex],
             inputs.bestTargetFieldY[cameraIndex],
@@ -217,7 +217,14 @@ public class Vision extends SubsystemBase {
             new Rotation3d(
                 inputs.bestTargetFieldRotRoll[cameraIndex],
                 inputs.bestTargetFieldRotPitch[cameraIndex],
-                inputs.bestTargetFieldRotYaw[cameraIndex])));
+                inputs.bestTargetFieldRotYaw[cameraIndex]));
+
+    Logger.recordOutput(
+        "Vision/Camera" + cameraIndex + "/BestTarget/FieldPose", bestTargetFieldPose);
+    Logger.recordOutput(
+        "Vision/Camera" + cameraIndex + "/BestTarget/TagID", inputs.bestTargetId[cameraIndex]);
+
+    return Optional.of(bestTargetFieldPose);
   }
 
   /**
